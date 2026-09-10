@@ -13,8 +13,7 @@
  
   <!--YOU ARE ADDING THIS MAINLY-->
   <depend>std_msgs</depend>
-  <!-- basically creating a message type dependancy -->
-  <depend>sensor_msgs</depend> 
+  <depend>sensor_msgs</depend>  <!-- Add sensor_msgs dependency -->
  
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
