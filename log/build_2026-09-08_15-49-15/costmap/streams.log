@@ -1,0 +1,32 @@
+[0.047s] Invoking command in '/home/abdul/wato_asd_training/build/costmap': /usr/bin/cmake /home/abdul/wato_asd_training/src/robot/costmap -DCMAKE_INSTALL_PREFIX=/home/abdul/wato_asd_training/install/costmap
+[0.407s] -- The C compiler identification is GNU 15.2.0
+[1.580s] -- The CXX compiler identification is GNU 15.2.0
+[2.458s] -- Detecting C compiler ABI info
+[2.803s] -- Detecting C compiler ABI info - done
+[2.830s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.831s] -- Detecting C compile features
+[2.831s] -- Detecting C compile features - done
+[2.863s] -- Detecting CXX compiler ABI info
+[3.204s] -- Detecting CXX compiler ABI info - done
+[3.233s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[3.234s] -- Detecting CXX compile features
+[3.235s] -- Detecting CXX compile features - done
+[6.536s] [31mCMake Error at CMakeLists.txt:14 (find_package):
+[6.537s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[6.537s]   has asked CMake to find a package configuration file provided by
+[6.537s]   "ament_cmake", but CMake did not find one.
+[6.537s] 
+[6.538s]   Could not find a package configuration file provided by "ament_cmake" with
+[6.538s]   any of the following names:
+[6.538s] 
+[6.538s]     ament_cmakeConfig.cmake
+[6.538s]     ament_cmake-config.cmake
+[6.538s] 
+[6.538s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[6.538s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[6.538s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[6.538s]   has been installed.
+[6.538s] 
+[6.539s] [0m
+[6.539s] -- Configuring incomplete, errors occurred!
+[6.551s] Invoked command in '/home/abdul/wato_asd_training/build/costmap' returned '1': /usr/bin/cmake /home/abdul/wato_asd_training/src/robot/costmap -DCMAKE_INSTALL_PREFIX=/home/abdul/wato_asd_training/install/costmap

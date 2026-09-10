@@ -1,0 +1,21 @@
+[0.000000] (-) TimerEvent: {}
+[0.001141] (-) JobUnselected: {'identifier': 'aggregator'}
+[0.001271] (-) JobUnselected: {'identifier': 'aggregator'}
+[0.001337] (-) JobUnselected: {'identifier': 'bringup_robot'}
+[0.001396] (-) JobUnselected: {'identifier': 'control'}
+[0.001456] (-) JobUnselected: {'identifier': 'gazebo'}
+[0.001522] (-) JobUnselected: {'identifier': 'map_memory'}
+[0.001566] (-) JobUnselected: {'identifier': 'odometry_spoof'}
+[0.001588] (-) JobUnselected: {'identifier': 'planner'}
+[0.001600] (-) JobUnselected: {'identifier': 'producer'}
+[0.001610] (-) JobUnselected: {'identifier': 'producer'}
+[0.001620] (-) JobUnselected: {'identifier': 'sample_msgs'}
+[0.001630] (-) JobUnselected: {'identifier': 'sample_msgs'}
+[0.001640] (-) JobUnselected: {'identifier': 'transformer'}
+[0.001649] (-) JobUnselected: {'identifier': 'transformer'}
+[0.001666] (costmap) JobQueued: {'identifier': 'costmap', 'dependencies': OrderedDict()}
+[0.004645] (costmap) JobStarted: {'identifier': 'costmap'}
+[0.035268] (costmap) JobProgress: {'identifier': 'costmap', 'progress': 'cmake'}
+[0.039390] (costmap) StderrLine: {'line': b'Traceback (most recent call last):\n  File "/usr/lib/python3/dist-packages/colcon_core/executor/__init__.py", line 91, in __call__\n    rc = await self.task(*args, **kwargs)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/usr/lib/python3/dist-packages/colcon_core/task/__init__.py", line 93, in __call__\n    return await task_method(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/usr/lib/python3/dist-packages/colcon_ros/task/ament_cmake/build.py", line 59, in build\n    rc = await extension.build(\n         ^^^^^^^^^^^^^^^^^^^^^^\n        skip_hook_creation=False,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^\n        environment_callback=add_app_to_cpp)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/usr/lib/python3/dist-packages/colcon_cmake/task/cmake/build.py", line 87, in build\n    rc = await self._reconfigure(args, env)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/usr/lib/python3/dist-packages/colcon_cmake/task/cmake/build.py", line 169, in _reconfigure\n    raise RuntimeError("Could not find \'cmake\' executable")\nRuntimeError: Could not find \'cmake\' executable\n'}
+[0.042206] (costmap) JobEnded: {'identifier': 'costmap', 'rc': 1}
+[0.050559] (-) EventReactorShutdown: {}

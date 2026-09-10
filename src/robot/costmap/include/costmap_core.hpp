@@ -8,11 +8,16 @@ namespace robot
 
 class CostmapCore {
   public:
-    // Constructor, we pass in the node's RCLCPP logger to enable logging to terminal
+    
+    // Constructor + logger arg  
     explicit CostmapCore(const rclcpp::Logger& logger);
+    
 
   private:
-    rclcpp::Logger logger_;
+
+    // Member variabl
+    rclcpp::Logger logger_; 
+    
 
 };
 
