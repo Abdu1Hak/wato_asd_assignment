@@ -6,12 +6,14 @@
 
 CostmapNode::CostmapNode() : Node("costmap"), costmap_(robot::CostmapCore(this->get_logger())) 
 {
+  // from the header, use those two objects here:
   lidar_sub = this->create_subscription<sensor_msgs::msg::LaserScan>(
     "/lidar", // topic name
     10, // queue size 
     std::bind(&CostmapNode::laserCallback, this, std::placeholders::_1));
 
-  costmap_pub = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/costmap", 10)
+  // declare which topic to publish
+  costmap_pub = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/costmap", 10);
 }
 
 
@@ -41,28 +43,19 @@ void CostmapNode::laserCallback(const sensor_msgs::msg::LaserScan::SharedPtr sca
   costmap_.inflateObstacles();
 
   // Step 4: Publish Costmap 
-  costmap_.publishCostmap() 
-    
-
-
+  auto msg = costmap_.getCostmapMsg(); 
+  msg.header.stamp = this->now(); 
+  costmap_pub->publish(msg); 
   
+    
 }
 
-
- 
 int main(int argc, char ** argv)
 {
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<CostmapNode>());
-  rclcpp::shutdown();
-  return 0;
+  rclcpp::init(argc, argv);                      // 1. Initializes ROS2 Middleware 
+  rclcpp::spin(std::make_shared<CostmapNode>()); // 2. Block and listen for callback
+  rclcpp::shutdown();                            // 3. Cleanup on exit() 
+  return 0; 
 }
-
-// Current Workflow: 
-// 1. Main() calls CostmapNode to create an object 
-// 2. CostmapNode constructor runs, which subscribes to /lidar topic and sets up the callback function laserCallback.
-// 3. LaserCallback resets the costmap
-// 4. LaserCallback converts the laser scan data to grid coordinates. 
-// 5. LaserCallback marks the obstacles in the costmap based on the grid coordinates - helper function for now 
 
 

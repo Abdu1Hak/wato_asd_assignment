@@ -1,0 +1,20 @@
+[0.036s] Invoking command in '/home/abdul/wato_asd_training/build/costmap': /usr/bin/cmake /home/abdul/wato_asd_training/src/robot/costmap -DCMAKE_INSTALL_PREFIX=/home/abdul/wato_asd_training/install/costmap
+[4.309s] [31mCMake Error at CMakeLists.txt:14 (find_package):
+[4.309s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[4.310s]   has asked CMake to find a package configuration file provided by
+[4.310s]   "ament_cmake", but CMake did not find one.
+[4.310s] 
+[4.310s]   Could not find a package configuration file provided by "ament_cmake" with
+[4.310s]   any of the following names:
+[4.310s] 
+[4.310s]     ament_cmakeConfig.cmake
+[4.310s]     ament_cmake-config.cmake
+[4.310s] 
+[4.310s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[4.310s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[4.310s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[4.311s]   has been installed.
+[4.311s] 
+[4.311s] [0m
+[4.311s] -- Configuring incomplete, errors occurred!
+[4.323s] Invoked command in '/home/abdul/wato_asd_training/build/costmap' returned '1': /usr/bin/cmake /home/abdul/wato_asd_training/src/robot/costmap -DCMAKE_INSTALL_PREFIX=/home/abdul/wato_asd_training/install/costmap

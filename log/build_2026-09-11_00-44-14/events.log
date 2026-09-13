@@ -1,0 +1,80 @@
+[0.000000] (-) TimerEvent: {}
+[0.001390] (-) JobUnselected: {'identifier': 'aggregator'}
+[0.001526] (-) JobUnselected: {'identifier': 'aggregator'}
+[0.001594] (-) JobUnselected: {'identifier': 'bringup_robot'}
+[0.001649] (-) JobUnselected: {'identifier': 'control'}
+[0.001707] (-) JobUnselected: {'identifier': 'gazebo'}
+[0.001764] (-) JobUnselected: {'identifier': 'map_memory'}
+[0.001826] (-) JobUnselected: {'identifier': 'odometry_spoof'}
+[0.001876] (-) JobUnselected: {'identifier': 'planner'}
+[0.001921] (-) JobUnselected: {'identifier': 'producer'}
+[0.001966] (-) JobUnselected: {'identifier': 'producer'}
+[0.002013] (-) JobUnselected: {'identifier': 'sample_msgs'}
+[0.002065] (-) JobUnselected: {'identifier': 'sample_msgs'}
+[0.002114] (-) JobUnselected: {'identifier': 'transformer'}
+[0.002167] (-) JobUnselected: {'identifier': 'transformer'}
+[0.002224] (costmap) JobQueued: {'identifier': 'costmap', 'dependencies': OrderedDict()}
+[0.002343] (costmap) JobStarted: {'identifier': 'costmap'}
+[0.024694] (costmap) JobProgress: {'identifier': 'costmap', 'progress': 'cmake'}
+[0.025696] (costmap) Command: {'cmd': ['/usr/bin/cmake', '/home/abdul/wato_asd_training/src/robot/costmap', '-DCMAKE_INSTALL_PREFIX=/home/abdul/wato_asd_training/install/costmap'], 'cwd': '/home/abdul/wato_asd_training/build/costmap', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'abdul', 'SHLVL': '1', 'MOTD_SHOWN': 'update-motd', 'HOME': '/home/abdul', 'OLDPWD': '/home/abdul', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'WSL_DISTRO_NAME': 'Ubuntu', 'WAYLAND_DISPLAY': 'wayland-0', 'LOGNAME': 'abdul', 'NAME': 'Laptop', 'WSL_INTEROP': '/run/WSL/17267_interop', 'PULSE_SERVER': 'unix:/mnt/wslg/PulseServer', '_': '/usr/bin/colcon', 'TERM': 'xterm-256color', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/abdul/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand:/mnt/c/Users/abdul/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Graphviz/bin:/mnt/c/Users/abdul/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/abdul/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/abdul/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/abdul/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/abdul/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/abdul/AppData/Roaming/npm:/mnt/c/Users/abdul/AppData/Local/Programs/Kiro/bin:/mnt/c/Users/abdul/AppData/Local/Programs/Antigravity IDE/bin:/mnt/c/Users/abdul/AppData/Local/Kiro-Cli/:/Docker/host/bin:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/abdul/wato_asd_training/build/costmap', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'COLCON': '1', 'WSL2_GUI_APPS_ENABLED': '1', 'HOSTTYPE': 'x86_64', 'WSLENV': ''}), 'shell': False}
+[0.093448] (-) TimerEvent: {}
+[0.194062] (-) TimerEvent: {}
+[0.294614] (-) TimerEvent: {}
+[0.398617] (-) TimerEvent: {}
+[0.499435] (-) TimerEvent: {}
+[0.599996] (-) TimerEvent: {}
+[0.706625] (-) TimerEvent: {}
+[0.807201] (-) TimerEvent: {}
+[0.907812] (-) TimerEvent: {}
+[1.008377] (-) TimerEvent: {}
+[1.109603] (-) TimerEvent: {}
+[1.210190] (-) TimerEvent: {}
+[1.310682] (-) TimerEvent: {}
+[1.411153] (-) TimerEvent: {}
+[1.511729] (-) TimerEvent: {}
+[1.612234] (-) TimerEvent: {}
+[1.712797] (-) TimerEvent: {}
+[1.813399] (-) TimerEvent: {}
+[1.913901] (-) TimerEvent: {}
+[2.015362] (-) TimerEvent: {}
+[2.116111] (-) TimerEvent: {}
+[2.217663] (-) TimerEvent: {}
+[2.318302] (-) TimerEvent: {}
+[2.418876] (-) TimerEvent: {}
+[2.519473] (-) TimerEvent: {}
+[2.620180] (-) TimerEvent: {}
+[2.721177] (-) TimerEvent: {}
+[2.821715] (-) TimerEvent: {}
+[2.922204] (-) TimerEvent: {}
+[3.022928] (-) TimerEvent: {}
+[3.123533] (-) TimerEvent: {}
+[3.224120] (-) TimerEvent: {}
+[3.324804] (-) TimerEvent: {}
+[3.425787] (-) TimerEvent: {}
+[3.526328] (-) TimerEvent: {}
+[3.626954] (-) TimerEvent: {}
+[3.727471] (-) TimerEvent: {}
+[3.827979] (-) TimerEvent: {}
+[3.928499] (-) TimerEvent: {}
+[4.002911] (costmap) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:14 (find_package):\n'}
+[4.003286] (costmap) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[4.003452] (costmap) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[4.003559] (costmap) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[4.003675] (costmap) StderrLine: {'line': b'\n'}
+[4.003786] (costmap) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[4.003881] (costmap) StderrLine: {'line': b'  any of the following names:\n'}
+[4.003981] (costmap) StderrLine: {'line': b'\n'}
+[4.004081] (costmap) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[4.004234] (costmap) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[4.005418] (costmap) StderrLine: {'line': b'\n'}
+[4.005571] (costmap) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[4.005663] (costmap) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[4.005720] (costmap) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[4.005766] (costmap) StderrLine: {'line': b'  has been installed.\n'}
+[4.005809] (costmap) StderrLine: {'line': b'\n'}
+[4.005857] (costmap) StderrLine: {'line': b'\x1b[0m\n'}
+[4.006669] (costmap) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[4.013390] (costmap) CommandEnded: {'returncode': 1}
+[4.028700] (-) TimerEvent: {}
+[4.075162] (costmap) JobEnded: {'identifier': 'costmap', 'rc': 1}
+[4.086932] (-) EventReactorShutdown: {}

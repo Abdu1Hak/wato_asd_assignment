@@ -23,7 +23,6 @@ class CostmapNode : public rclcpp::Node {
     // Member variables 
     robot::CostmapCore costmap_; 
 
-
     // Subscribe to /lidar  + Publisher to /costmap
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr lidar_sub;
     rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr costmap_pub; 
