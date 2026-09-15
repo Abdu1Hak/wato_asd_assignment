@@ -38,7 +38,7 @@ class MapMemoryNode : public rclcpp::Node {
     // Distance the robot must travel before the global map is updated again.
     // 1.5 m was far too coarse: obstacles the lidar could already see were not
     // in /map yet, so the planner routed straight through them.
-    const double distance_threshold_ = 0.3; 
+    const double distance_threshold_ = 5; 
 
     // subscribers 
     rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr costmap_sub; 

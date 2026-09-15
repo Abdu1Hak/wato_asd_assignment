@@ -26,11 +26,11 @@ class CostmapCore {
     // Member variable
     rclcpp::Logger logger_; 
     double resolution = 0.1; // meters per cell 
-    int height = 200; // 20 meters tall 
-    int width = 200; // 20 meters wide
-    double origin_x = -10.0; // bottom left 
-    double origin_y = -10.0; // bottom left 
-    double inflation_radius = 1.0;
+    int height = 300; // 20 meters tall 
+    int width = 300; // 20 meters wide
+    double origin_x = -15.0; // bottom left 
+    double origin_y = -15.0; // bottom left 
+    double inflation_radius = 1.3;
     int max_cost = 99; 
   
     std::vector<std::vector<int>> costmap_grid_; // 2D array to represent occupancy grid 

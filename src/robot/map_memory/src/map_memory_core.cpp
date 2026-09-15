@@ -6,7 +6,7 @@ namespace robot
 MapMemoryCore::MapMemoryCore(const rclcpp::Logger& logger) : logger_(logger) {
 
   // create the global grid 
-  global_grid_.assign(height_, std::vector<int8_t>(width_, -1));
+  global_grid_.assign(height_, std::vector<int8_t>(width_, 0));
 }
 
 
@@ -18,11 +18,13 @@ void MapMemoryCore::integrateCostmap(const nav_msgs::msg::OccupancyGrid& costmap
   double cm_oy = costmap.info.origin.position.y;
   double cm_res = costmap.info.resolution;
   size_t data_size = costmap.data.size();   
+  int cm_w = static_cast<int>(costmap.info.width);
+  int cm_h = static_cast<int>(costmap.info.height);
 
   // let cy and cx be the pixels across and down costmap
-  for (int cy = 0; cy < 200; cy++){
-    for (int cx = 0; cx < 200; cx++){
-      int8_t value = costmap.data[cy * 200 + cx]; // convert 2d cords to 1d index to extract data value 
+  for (int cy = 0; cy < cm_h; cy++){
+    for (int cx = 0; cx < cm_w; cx++){
+      int8_t value = costmap.data[cy * cm_w + cx]; // convert 2d cords to 1d index to extract data value 
       
       if (value == -1) continue;
       uint8_t cost = static_cast<uint8_t>(value); 
