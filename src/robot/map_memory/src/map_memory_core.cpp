@@ -41,7 +41,10 @@ void MapMemoryCore::integrateCostmap(const nav_msgs::msg::OccupancyGrid& costmap
       int global_y = static_cast<int>((world_y - origin_y_) / resolution_);  
 
       if (global_x < 0 || global_x >= width_ || global_y < 0 || global_y >= height_) continue; 
-      global_grid_[global_y][global_x] = value; 
+      // Merge via max so previously observed obstacles/inflation are never
+      // erased by a later scan that simply didn't re-see them (e.g. the
+      // obstacle is now outside the local costmap window).
+      global_grid_[global_y][global_x] = std::max(global_grid_[global_y][global_x], value); 
 
     }
   }

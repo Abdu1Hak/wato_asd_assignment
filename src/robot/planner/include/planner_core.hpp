@@ -5,6 +5,7 @@
 #include "nav_msgs/msg/occupancy_grid.hpp"
 #include "nav_msgs/msg/path.hpp"
 #include "geometry_msgs/msg/pose.hpp"
+#include "geometry_msgs/msg/pose_stamped.hpp"
 
 namespace robot
 {
@@ -24,11 +25,14 @@ class PlannerCore {
     }; 
     
     double heuristic(int x1, int y1, int x2, int y2) const; 
-    bool isOccupied(const nav_msgs::msg::OccupancyGrid& grid, int x, int y) const; 
-  
-  
-    rclcpp::Logger logger_;
+    bool isTraversable(const nav_msgs::msg::OccupancyGrid& grid, int x, int y) const; 
+    int cellCost(const nav_msgs::msg::OccupancyGrid& grid, int x, int y) const; 
+    bool canMoveBetween(const nav_msgs::msg::OccupancyGrid& grid, int fx, int fy, int tx, int ty) const;
 
+    rclcpp::Logger logger_;
+    // weight applied to a cell's occupancy value in the cost function.  
+    double cost_weight_ = 0.8; // strongly penalize pink regions
+    int occupancy_threshold_ = 30;
 };
 
 }  

@@ -4,7 +4,7 @@ PlannerNode::PlannerNode() : Node("planner"), planner_(robot::PlannerCore(this->
 
   // Subs 
   map_sub_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
-    "/map", 10, std::bind(&PlannerNode::mapCallback, this, std::placeholders::_1));
+    "/costmap", 10, std::bind(&PlannerNode::mapCallback, this, std::placeholders::_1));
   
   goal_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>(
     "/goal_point", 10, std::bind(&PlannerNode::goalCallback, this, std::placeholders::_1));
@@ -20,20 +20,34 @@ PlannerNode::PlannerNode() : Node("planner"), planner_(robot::PlannerCore(this->
 
 void PlannerNode::mapCallback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg){
   current_map_ = *msg;
+  have_map_ = true;
   if (state_ == State::WAITING_FOR_ROBOT_TO_REACH_GOAL) {
-  planPath();
+    planPath();
   }
 }
 
 void PlannerNode::goalCallback(const geometry_msgs::msg::PointStamped::SharedPtr msg) {
   goal_ = *msg;
-  goal_received_ = true;
+  have_goal_ = true;
   state_ = State::WAITING_FOR_ROBOT_TO_REACH_GOAL;
   planPath();
 }
 
 void PlannerNode::odomCallback(const nav_msgs::msg::Odometry::SharedPtr msg) {
   robot_pose_ = msg->pose.pose;
+  have_odom_ = true;
+}
+
+void PlannerNode::planPath(){ 
+  if (!have_map_ || !have_odom_ || !have_goal_ || current_map_.data.empty()){
+    return; 
+  }
+  geometry_msgs::msg::Pose goal_pose; 
+  goal_pose.position = goal_.point; 
+
+  nav_msgs::msg::Path path = planner_.planPath(current_map_, robot_pose_, goal_pose); 
+  path.header.stamp = this->get_clock()->now(); 
+  path_pub_->publish(path); 
 }
 
 
@@ -55,19 +69,6 @@ bool PlannerNode::goalReached(){
   return std::sqrt(dx * dx + dy * dy) < 0.5; 
 }
 
-
-void PlannerNode::planPath(){ 
-  if (!goal_received_ || current_map_.data.empty()){
-    return; 
-  }
-  geometry_msgs::msg::Pose goal_pose; 
-  goal_pose.position = goal_.point; 
-
-  nav_msgs::msg::Path path = planner_.planPath(current_map_, robot_pose_, goal_pose); 
-  path.header.stamp = this->get_clock()->now(); 
-  path.header.frame_id = "sim_world"; 
-  path_pub_->publish(path); 
-}
 
 
 int main(int argc, char ** argv)

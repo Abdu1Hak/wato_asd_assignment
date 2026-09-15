@@ -39,6 +39,10 @@ class PlannerNode : public rclcpp::Node {
     void planPath(); 
 
     // Data Storage 
+    bool have_map_ = false;
+    bool have_odom_ = false;
+    bool have_goal_ = false;
+    
     nav_msgs::msg::OccupancyGrid current_map_; 
     geometry_msgs::msg::PointStamped goal_; 
     geometry_msgs::msg::Pose robot_pose_; 
