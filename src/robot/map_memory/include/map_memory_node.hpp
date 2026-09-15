@@ -35,9 +35,8 @@ class MapMemoryNode : public rclcpp::Node {
     double current_yaw_ = 0.0; // heading angle in radians 
     double last_update_x_ = 0.0; 
     double last_update_y_ = 0.0; // position at last map update
-    // Distance the robot must travel before the global map is updated again.
-    // 1.5 m was far too coarse: obstacles the lidar could already see were not
-    // in /map yet, so the planner routed straight through them.
+    
+    // Changed to 5m to minmize refresh jitters
     const double distance_threshold_ = 5; 
 
     // subscribers 
