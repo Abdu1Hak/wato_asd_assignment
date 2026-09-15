@@ -4,7 +4,7 @@ PlannerNode::PlannerNode() : Node("planner"), planner_(robot::PlannerCore(this->
 
   // Subs 
   map_sub_ = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
-    "/costmap", 10, std::bind(&PlannerNode::mapCallback, this, std::placeholders::_1));
+    "/map", 10, std::bind(&PlannerNode::mapCallback, this, std::placeholders::_1));
   
   goal_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>(
     "/goal_point", 10, std::bind(&PlannerNode::goalCallback, this, std::placeholders::_1));

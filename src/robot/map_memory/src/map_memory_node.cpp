@@ -12,7 +12,11 @@ MapMemoryNode::MapMemoryNode() : Node("map_memory"), map_memory_(robot::MapMemor
     10, 
     std::bind(&MapMemoryNode::odomCallback, this, std::placeholders::_1));
 
+  // Publisher for the fused global map. This was missing, which left map_pub
+  // null and crashed the node the first time timerCallback tried to publish.
   map_pub = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/map", 10);
+
+  
   timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&MapMemoryNode::timerCallback, this));
 }
 
@@ -26,6 +30,7 @@ void MapMemoryNode::costmapCallback(const nav_msgs::msg::OccupancyGrid::SharedPt
 void MapMemoryNode::odomCallback(const nav_msgs::msg::Odometry::SharedPtr msg){ 
   current_x_ = msg->pose.pose.position.x; 
   current_y_ = msg->pose.pose.position.y; 
+  have_odom_ = true; 
 
   // ROS stores rotation as quaternion (x,y,z,w)
   auto q = msg->pose.pose.orientation; 
@@ -45,12 +50,23 @@ void MapMemoryNode::odomCallback(const nav_msgs::msg::Odometry::SharedPtr msg){
 }
 
 void MapMemoryNode::timerCallback(){
-  if (!should_update_map_ || !costmap_updated_) return; 
+  
+  // Do not integrate until we know where the robot actually is, otherwise the
+  // costmap gets stamped into the global map at the default pose and, because
+  // cells are merged with std::max, that bad data can never be cleared.
+  if (!have_odom_ || !costmap_updated_ || latest_costmap_.data.empty() || latest_costmap_.info.width == 0){
+    return; 
+  }
+
+  if (!should_update_map_ && first_update_done_) {
+    return; 
+  }
 
   map_memory_.integrateCostmap(latest_costmap_, current_x_, current_y_, current_yaw_); 
   last_update_x_ = current_x_; 
   last_update_y_ = current_y_; 
   should_update_map_ = false; 
+  first_update_done_ = true;
 
   auto global_map = map_memory_.getGlobalMap(); 
   global_map.header.stamp = this->now(); 

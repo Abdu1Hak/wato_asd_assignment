@@ -16,14 +16,16 @@ void MapMemoryCore::integrateCostmap(const nav_msgs::msg::OccupancyGrid& costmap
   double sin_yaw = std::sin(robot_yaw); 
   double cm_ox = costmap.info.origin.position.x; 
   double cm_oy = costmap.info.origin.position.y;
-  double cm_res = costmap.info.resolution;  
+  double cm_res = costmap.info.resolution;
+  size_t data_size = costmap.data.size();   
 
   // let cy and cx be the pixels across and down costmap
   for (int cy = 0; cy < 200; cy++){
     for (int cx = 0; cx < 200; cx++){
       int8_t value = costmap.data[cy * 200 + cx]; // convert 2d cords to 1d index to extract data value 
-      if (value < 0 ) continue; 
-
+      
+      if (value == -1) continue;
+      uint8_t cost = static_cast<uint8_t>(value); 
       // Transformations 
       // 1. Grid Cell Index -> Local Mapping
       
@@ -41,10 +43,14 @@ void MapMemoryCore::integrateCostmap(const nav_msgs::msg::OccupancyGrid& costmap
       int global_y = static_cast<int>((world_y - origin_y_) / resolution_);  
 
       if (global_x < 0 || global_x >= width_ || global_y < 0 || global_y >= height_) continue; 
-      // Merge via max so previously observed obstacles/inflation are never
-      // erased by a later scan that simply didn't re-see them (e.g. the
-      // obstacle is now outside the local costmap window).
-      global_grid_[global_y][global_x] = std::max(global_grid_[global_y][global_x], value); 
+      
+      int8_t current_val = global_grid_[global_y][global_x]; 
+      if (current_val == -1){
+        global_grid_[global_y][global_x] = static_cast<int8_t>(cost); 
+      } else {
+        uint8_t cur_cost = static_cast<uint8_t>(current_val); 
+        global_grid_[global_y][global_x] = static_cast<int8_t>(std::max(cur_cost, cost)); 
+      }
 
     }
   }

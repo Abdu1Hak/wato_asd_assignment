@@ -25,12 +25,20 @@ class MapMemoryNode : public rclcpp::Node {
     
     bool costmap_updated_ = false;
     bool should_update_map_ = false; 
+    bool first_update_done_ = false; 
+    // True once a real odometry message has been received. Without this, the
+    // first integration could run with the default pose (0,0,yaw 0) and stamp
+    // obstacles into the global map at the wrong world position.
+    bool have_odom_ = false; 
     double current_x_ = 0.0; 
     double current_y_ = 0.0; 
     double current_yaw_ = 0.0; // heading angle in radians 
     double last_update_x_ = 0.0; 
     double last_update_y_ = 0.0; // position at last map update
-    const double distance_threshold_ = 1.5; 
+    // Distance the robot must travel before the global map is updated again.
+    // 1.5 m was far too coarse: obstacles the lidar could already see were not
+    // in /map yet, so the planner routed straight through them.
+    const double distance_threshold_ = 0.3; 
 
     // subscribers 
     rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr costmap_sub; 

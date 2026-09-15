@@ -32,7 +32,13 @@ class PlannerCore {
     rclcpp::Logger logger_;
     // weight applied to a cell's occupancy value in the cost function.  
     double cost_weight_ = 0.8; // strongly penalize pink regions
-    int occupancy_threshold_ = 30;
+    int occupancy_threshold_ = 65;
+    // Cells at or above this cost are impassable. Inflation runs 99 down to 0
+    // across a 1.0 m radius, so 65 hard-blocks only the innermost ~0.34 m and
+    // leaves the rest of the inflation band drivable-but-expensive. That lets
+    // the planner squeeze past an obstacle when there is no better option,
+    // instead of the old 30 which walled off ~0.7 m and could make tight
+    // gaps unsolvable.
 };
 
 }  

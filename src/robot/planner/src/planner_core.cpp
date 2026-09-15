@@ -16,8 +16,9 @@ double PlannerCore::heuristic(int x1, int y1 , int x2, int y2) const {
     return std::hypot(x2 - x1, y2 - y1);
 }
 
-// Because the planner doesnt know the costmap of certain areas, unknown areas of -1 must have cost of 0 
-// As the map updates, the path prefers curving around inflated obstacles
+// Unknown cells (-1) are treated as traversable on purpose: we optimistically
+// assume unmapped space is clear so a far-away goal is reachable, then correct
+// the route as the map fills in (the node replans on every new map).
 bool PlannerCore::isTraversable(const nav_msgs::msg::OccupancyGrid& grid, int x, int y) const {
 
     int width  = static_cast<int>(grid.info.width);
@@ -29,15 +30,7 @@ bool PlannerCore::isTraversable(const nav_msgs::msg::OccupancyGrid& grid, int x,
 
     int8_t raw = grid.data[idx];
 
-    // Quick debug 
-    if (raw != 0 && raw != -1){
-        RCLCPP_INFO(logger_, "Cell (%d, %d) has raw value: %d", x, y, raw);
-    }
-
-
     if (raw == -1) return true;
-    // Must be mapped (val >= 0) and below the occupied threshold
-    // Slight change: Unknown space is treated as traversable
     uint8_t cost = static_cast<uint8_t>(raw); 
     return cost < occupancy_threshold_;
 }
@@ -50,8 +43,10 @@ int PlannerCore::cellCost(const nav_msgs::msg::OccupancyGrid& grid, int x, int y
     if (idx < 0 || idx >= static_cast<int>(grid.data.size())) return 0; 
 
     int8_t val = grid.data[idx]; 
-    // Unknown space has 0 cost - assumed free until sensed
-    if (val == -1) return 10; // slight penalty cost to i guess prefer the longer route avoiding pink 
+    // Mild penalty for unknown space: enough to prefer known-free cells when
+    // the routes are comparable, but small enough that the planner still heads
+    // toward an unmapped goal instead of taking an enormous detour.
+    if (val == -1) return 2;
     return static_cast<uint8_t>(val); 
 }
 
@@ -71,24 +66,12 @@ nav_msgs::msg::Path PlannerCore::planPath(
     const geometry_msgs::msg::Pose& goal)
 {
    // Enter A* Algorithm 
-    // MORE DEBUG -------AAAA
     nav_msgs::msg::Path path;
     path.header.frame_id = grid.header.frame_id.empty() ? "sim_world" : grid.header.frame_id;
-    
-    int zero_count = 0;
-    int minus_one_count = 0;
-    int other_negative = 0;
-    int positive_count = 0;
 
-    for (int8_t v : grid.data) {
-        if (v == 0) zero_count++;
-        else if (v == -1) minus_one_count++;
-        else if (v < -1) other_negative++;
-        else positive_count++;
+    if (grid.data.empty() || grid.info.resolution <= 0.0){
+        return path;
     }
-
-    RCLCPP_INFO(logger_, "Zeros (free): %d | -1 (unknown): %d | Negative costs: %d | Positive costs: %d",
-    zero_count, minus_one_count, other_negative, positive_count);
    
    // 1. World Cords to Grid Cells of the Robot Cell + Goal Cell
     int sx = static_cast<int>(std::floor((start.position.x - grid.info.origin.position.x) / grid.info.resolution)); 
